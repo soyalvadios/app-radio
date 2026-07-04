@@ -1,0 +1,123 @@
+// src/hooks/useCatalog.ts
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { CatalogStorageService } from '../services/CatalogStorageService';
+import type { MexicanState, RadioStation } from '../types';
+
+/** Normaliza para búsqueda: sin acentos, minúsculas, sin espacios extra. */
+function normalize(text: string): string {
+  return text
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim();
+}
+
+export interface UseCatalogReturn {
+  loading: boolean;
+  error: string | null;
+  stations: RadioStation[]; // catálogo completo
+  filteredStations: RadioStation[]; // tras filtro de estado + búsqueda
+  favoriteStations: RadioStation[];
+  favoriteIds: Set<string>;
+  searchQuery: string;
+  selectedState: MexicanState | null;
+  setSearchQuery: (query: string) => void;
+  setSelectedState: (state: MexicanState | null) => void;
+  toggleFavorite: (stationId: string) => Promise<void>;
+  isFavorite: (stationId: string) => boolean;
+  refresh: () => Promise<void>;
+}
+
+export function useCatalog(): UseCatalogReturn {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [stations, setStations] = useState<RadioStation[]>([]);
+  const [favoriteIds, setFavoriteIds] = useState<Set<string>>(new Set());
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedState, setSelectedState] = useState<MexicanState | null>(null);
+
+  const load = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      // initialize() siembra el seed si está vacío y devuelve el catálogo.
+      const [catalog, favIds] = await Promise.all([
+        CatalogStorageService.initialize(),
+        CatalogStorageService.getFavoriteIds(),
+      ]);
+      setStations(catalog);
+      setFavoriteIds(new Set(favIds));
+    } catch (e) {
+      console.error('[useCatalog] load', e);
+      setError('No se pudo cargar el catálogo local.');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    load();
+  }, [load]);
+
+  // Filtrado en memoria: el catálogo es local y pequeño, así búsqueda y filtro
+  // por estado funcionan 100% offline e instantáneos.
+  const filteredStations = useMemo(() => {
+    const q = normalize(searchQuery);
+    return stations.filter((station) => {
+      if (selectedState != null && station.state !== selectedState) return false;
+      if (q.length === 0) return true;
+      const haystack = normalize(
+        `${station.name} ${station.frequency} ${station.city ?? ''} ${station.genre ?? ''} ${station.state}`,
+      );
+      return haystack.includes(q);
+    });
+  }, [stations, selectedState, searchQuery]);
+
+  const favoriteStations = useMemo(
+    () => stations.filter((station) => favoriteIds.has(station.id)),
+    [stations, favoriteIds],
+  );
+
+  const isFavorite = useCallback(
+    (stationId: string) => favoriteIds.has(stationId),
+    [favoriteIds],
+  );
+
+  const favoriteIdsRef = useRef(favoriteIds);
+  useEffect(() => { favoriteIdsRef.current = favoriteIds; }, [favoriteIds]);
+
+  const toggleFavorite = useCallback(async (stationId: string) => {
+    const prevSnapshot = new Set(favoriteIdsRef.current);
+    setFavoriteIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(stationId)) next.delete(stationId);
+      else next.add(stationId);
+      return next;
+    });
+
+    try {
+      const persisted = await CatalogStorageService.toggleFavorite(stationId);
+      setFavoriteIds(new Set(persisted));
+    } catch (e) {
+      console.error('[useCatalog] toggleFavorite', e);
+      setFavoriteIds(prevSnapshot);
+      setError('No se pudo actualizar favoritos.');
+    }
+  }, []);
+
+  return {
+    loading,
+    error,
+    stations,
+    filteredStations,
+    favoriteStations,
+    favoriteIds,
+    searchQuery,
+    selectedState,
+    setSearchQuery,
+    setSelectedState,
+    toggleFavorite,
+    isFavorite,
+    refresh: load,
+  };
+}
