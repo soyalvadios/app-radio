@@ -74,8 +74,8 @@ El catálogo se guarda localmente al primerarranque. Búsqueda y filtros jalan s
 ## 🗺️ Roadmap
 
 - [ ] 📍 Catálogo nacional (32 estados)
-- [ ] 📻 FM por hardware (Android)
-- [ ] 🔄 Sintonización por frecuencia
+- [x] 🔄 Sintonización por frecuencia (streaming del catálogo)
+- [ ] 📻 FM por hardware (Android, futuro)
 - [ ] ⏺️ Grabación de streaming
 - [ ] 📱 Widget Android
 - [ ] 🚗 CarPlay / Android Auto

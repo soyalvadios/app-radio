@@ -1,6 +1,6 @@
 import { Tabs } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { House, Star } from 'lucide-react-native';
+import { House, Radio, Star } from 'lucide-react-native';
 import { CatalogProvider } from '../../src/context/CatalogContext';
 import { TAB_BAR_HEIGHT } from '../../src/theme/layout';
 
@@ -25,6 +25,13 @@ export default function TabsLayout() {
           options={{
             title: 'Inicio',
             tabBarIcon: ({ color, size }) => <House size={size} color={color} />,
+          }}
+        />
+        <Tabs.Screen
+          name="tuner"
+          options={{
+            title: 'Sintonizar',
+            tabBarIcon: ({ color, size }) => <Radio size={size} color={color} />,
           }}
         />
         <Tabs.Screen

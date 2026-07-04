@@ -10,7 +10,8 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import { ChevronDown, Search } from 'lucide-react-native';
+import { router } from 'expo-router';
+import { ChevronDown, Radio, Search } from 'lucide-react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useCatalogContext } from '../context/CatalogContext';
 import { StationCard } from '../components/StationCard';
@@ -78,18 +79,28 @@ export function HomeScreen() {
   return (
     <View style={[styles.screen, { paddingTop: insets.top + 12 }]}>
       <View style={styles.header}>
-        <View style={styles.searchBar}>
-          <Search size={18} color={COLORS.textMuted} />
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Buscar estación, frecuencia…"
-            placeholderTextColor={COLORS.textMuted}
-            value={searchQuery}
-            onChangeText={setSearchQuery}
-            autoCorrect={false}
-            autoCapitalize="none"
-            returnKeyType="search"
-          />
+        <View style={styles.headerRow}>
+          <View style={styles.searchBar}>
+            <Search size={18} color={COLORS.textMuted} />
+            <TextInput
+              style={styles.searchInput}
+              placeholder="Buscar estación, frecuencia…"
+              placeholderTextColor={COLORS.textMuted}
+              value={searchQuery}
+              onChangeText={setSearchQuery}
+              autoCorrect={false}
+              autoCapitalize="none"
+              returnKeyType="search"
+            />
+          </View>
+          <Pressable
+            onPress={() => router.navigate('/(tabs)/tuner')}
+            style={styles.tunerBtn}
+            accessibilityRole="button"
+            accessibilityLabel="Sintonizar por frecuencia"
+          >
+            <Radio size={22} color={COLORS.accent} />
+          </Pressable>
         </View>
 
         <Pressable
@@ -139,17 +150,31 @@ const styles = StyleSheet.create({
     zIndex: 10,
     paddingBottom: 8,
   },
+  headerRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginHorizontal: 16,
+    gap: 8,
+  },
   searchBar: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
-    marginHorizontal: 16,
     paddingHorizontal: 12,
     height: 44,
     borderRadius: 12,
     backgroundColor: COLORS.surface,
     borderWidth: 1,
     borderColor: COLORS.border,
+  },
+  tunerBtn: {
+    width: 44,
+    height: 44,
+    borderRadius: 12,
+    backgroundColor: '#F2F2F7',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   searchInput: {
     flex: 1,
