@@ -2,6 +2,7 @@
   "cli": {
     "appVersionSource": "remote"
   },
+  "node": "20",
   "build": {
     "preview": {
       "android": {
