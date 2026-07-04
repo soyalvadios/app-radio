@@ -2,13 +2,15 @@
   "cli": {
     "appVersionSource": "remote"
   },
-  "node": "20",
   "build": {
     "preview": {
+      "node": "20",
       "android": {
         "buildType": "apk"
       }
     },
-    "production": {}
+    "production": {
+      "node": "20"
+    }
   }
 }
