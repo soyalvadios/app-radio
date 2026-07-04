@@ -80,6 +80,28 @@ El catálogo se guarda localmente al primerarranque. Búsqueda y filtros jalan s
 - [ ] 📱 Widget Android
 - [ ] 🚗 CarPlay / Android Auto
 
+## ☕ Apoya el proyecto
+
+Nopales Radio es un proyecto personal open-source hecho con cariño.
+Si te sirvió, te gustó o quieres apoyar futuras mejoras, puedes invitarme un café por PayPal:
+
+<p align="center">
+  <a href="https://paypal.me/DAlvarado693" target="_blank">
+    <img src="https://img.shields.io/badge/PayPal-Invítame%20un%20café-00457C?style=for-the-badge&logo=paypal&logoColor=white" alt="Apoya con PayPal" />
+  </a>
+</p>
+
+> El apoyo es voluntario. El código sigue siendo MIT y libre para usar, modificar y compartir.
+
+## 📦 Build APK Android
+
+```bash
+npm install
+npm run typecheck
+npx eas build:configure
+npx eas build -p android --profile preview
+```
+
 ## ⚖️ Disclaimer
 
 Esta app es un proyecto personal open-source. Las estaciones, logos y stream URLs pertenecen a sus respectivos dueños. Los URLs pueden cambiar sin aviso. No garantizamos disponibilidad eterna de cada estación.
