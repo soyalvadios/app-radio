@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from 'react';
-import { Dimensions, PanResponder, Pressable, StyleSheet, Text, View } from 'react-native';
+import { LayoutChangeEvent, PanResponder, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ChevronLeft, ChevronRight, Play, Pause, Power, Radio, Star } from 'lucide-react-native';
 import { useCatalogContext } from '../../src/context/CatalogContext';
@@ -16,20 +16,6 @@ import {
   findNextAvailableFreq,
 } from '../../src/utils/frequency';
 
-const SCREEN_WIDTH = Dimensions.get('window').width;
-const RULER_PADDING_H = 24;
-const RULER_WIDTH = SCREEN_WIDTH - RULER_PADDING_H * 2;
-const FREQ_RANGE = FM_MAX - FM_MIN;
-const PX_PER_MHZ = RULER_WIDTH / FREQ_RANGE;
-
-function freqToX(freq: number): number {
-  return (freq - FM_MIN) * PX_PER_MHZ;
-}
-
-function xToFreq(x: number): number {
-  return clampFrequency(FM_MIN + x / PX_PER_MHZ);
-}
-
 const MAJOR_TICKS = [86, 89, 92, 95, 98, 101, 104, 107, 110];
 
 function formatFreq(f: number): string {
@@ -38,8 +24,9 @@ function formatFreq(f: number): string {
 
 export default function TunerScreen() {
   const insets = useSafeAreaInsets();
-  const { stations, favoriteIds, toggleFavorite, isFavorite } = useCatalogContext();
-  const { currentStation, status, playStation, pause, stop } = useRadioPlayerContext();
+  const { stations, toggleFavorite, isFavorite } = useCatalogContext();
+  const { currentStation, status, playStation, pause } = useRadioPlayerContext();
+  const freqRange = FM_MAX - FM_MIN;
 
   const availableFreqs = getAvailableFrequencies(stations);
 
@@ -48,33 +35,38 @@ export default function TunerScreen() {
     : FM_MIN;
 
   const [frequency, setFrequency] = useState(initialFreq);
-  const rulerRef = useRef<View>(null);
-  const rulerLayoutX = useRef(0);
+  const [rulerWidth, setRulerWidth] = useState(0);
+
+  const pxPerMhz = rulerWidth > 0 ? rulerWidth / freqRange : 1;
 
   const station = findExactStationByFrequency(stations, frequency);
-  const freqRounded = Math.round(frequency * 10) / 10;
   const isActive = currentStation?.id === station?.id;
   const isPlaying = isActive && status === PlayerStatus.PLAYING;
   const isStationLoading = isActive && (status === PlayerStatus.LOADING || status === PlayerStatus.BUFFERING);
   const fav = station ? isFavorite(station.id) : false;
 
-  const updateFreqFromPageX = useCallback((pageX: number) => {
-    const local = pageX - rulerLayoutX.current;
-    setFrequency(xToFreq(local));
-  }, []);
+  const updateFreqFromLocationX = useCallback((locationX: number) => {
+    if (rulerWidth <= 0) return;
+    const clamped = Math.max(0, Math.min(rulerWidth, locationX));
+    setFrequency(clampFrequency(FM_MIN + (clamped / rulerWidth) * freqRange));
+  }, [rulerWidth, freqRange]);
 
   const panResponder = useRef(
     PanResponder.create({
       onStartShouldSetPanResponder: () => true,
       onMoveShouldSetPanResponder: () => true,
       onPanResponderGrant: (evt) => {
-        updateFreqFromPageX(evt.nativeEvent.pageX);
+        updateFreqFromLocationX(evt.nativeEvent.locationX);
       },
       onPanResponderMove: (evt) => {
-        updateFreqFromPageX(evt.nativeEvent.pageX);
+        updateFreqFromLocationX(evt.nativeEvent.locationX);
       },
     }),
   ).current;
+
+  const handleRulerLayout = useCallback((e: LayoutChangeEvent) => {
+    setRulerWidth(e.nativeEvent.layout.width);
+  }, []);
 
   const handlePrev = useCallback(() => {
     const prev = findPrevAvailableFreq(availableFreqs, frequency);
@@ -100,13 +92,7 @@ export default function TunerScreen() {
     if (station) toggleFavorite(station.id);
   }, [station, toggleFavorite]);
 
-  const handleRulerLayout = useCallback(() => {
-    rulerRef.current?.measure((_x, _y, _w, _h, pageX) => {
-      rulerLayoutX.current = pageX;
-    });
-  }, []);
-
-  const indicatorX = freqToX(frequency);
+  const indicatorX = rulerWidth > 0 ? ((frequency - FM_MIN) / freqRange) * rulerWidth : 0;
 
   return (
     <View style={[styles.screen, { paddingTop: insets.top + 12 }]}>
@@ -163,27 +149,27 @@ export default function TunerScreen() {
         </View>
 
         <View
-          ref={rulerRef}
           style={styles.rulerContainer}
           onLayout={handleRulerLayout}
           {...panResponder.panHandlers}
         >
           <View style={styles.rulerTrack}>
             {MAJOR_TICKS.map((tick) => {
-              const x = freqToX(tick);
+              const x = rulerWidth > 0 ? ((tick - FM_MIN) / freqRange) * rulerWidth : 0;
               return (
                 <View key={`major-${tick}`} style={[styles.majorTick, { left: x }]}>
                   <Text style={styles.tickLabel}>{tick}</Text>
                 </View>
               );
             })}
-            {Array.from({ length: Math.floor(FREQ_RANGE) }, (_, i) => {
+            {Array.from({ length: Math.floor(freqRange) }, (_, i) => {
               const tickFreq = Math.floor(FM_MIN) + i + 1;
               if (tickFreq >= FM_MAX || MAJOR_TICKS.includes(tickFreq)) return null;
+              const x = rulerWidth > 0 ? ((tickFreq - FM_MIN) / freqRange) * rulerWidth : 0;
               return (
                 <View
                   key={`minor-${tickFreq}`}
-                  style={[styles.minorTick, { left: freqToX(tickFreq) }]}
+                  style={[styles.minorTick, { left: x }]}
                 />
               );
             })}
