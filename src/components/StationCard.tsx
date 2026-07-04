@@ -12,7 +12,8 @@ const COLORS = {
   textMuted: '#8E8E93',
 };
 
-function formatFrequency(station: RadioStation): string {
+function formatStationFrequency(station: RadioStation): string {
+  if (!station.frequency || station.frequency === 0) return 'Online';
   const freq = station.band === 'FM' ? station.frequency.toFixed(1) : String(Math.round(station.frequency));
   return `${freq} ${station.band}`;
 }
@@ -77,7 +78,7 @@ function StationCardBase({ station, isFavorite, onToggleFavorite }: StationCardP
             {station.name}
           </Text>
           <Text style={styles.meta} numberOfLines={1}>
-            {formatFrequency(station)} · {station.state}
+            {formatStationFrequency(station)} · {station.state}
           </Text>
 
           {activityLabel != null && (

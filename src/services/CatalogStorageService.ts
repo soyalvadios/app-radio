@@ -22,17 +22,25 @@ interface StationsRaw {
 }
 
 function fixEncoding(text: string): string {
-  try {
-    const bytes = new Uint8Array(text.length);
-    for (let i = 0; i < text.length; i++) {
-      const cp = text.charCodeAt(i);
-      if (cp > 0xFF) return text;
-      bytes[i] = cp;
-    }
-    return new TextDecoder('utf-8').decode(bytes);
-  } catch {
-    return text;
+  const bytes: number[] = [];
+  for (let i = 0; i < text.length; i++) {
+    const cp = text.charCodeAt(i);
+    if (cp > 0xFF) return text;
+    bytes.push(cp);
   }
+  const out: string[] = [];
+  let i = 0;
+  while (i < bytes.length) {
+    const b = bytes[i];
+    if (b < 0x80) { out.push(String.fromCodePoint(b)); i++; }
+    else if (b < 0xC0) { out.push(String.fromCodePoint(b)); i++; }
+    else if (b < 0xE0 && i + 1 < bytes.length) {
+      out.push(String.fromCodePoint(((b & 0x1F) << 6) | (bytes[i + 1] & 0x3F))); i += 2;
+    } else if (b < 0xF0 && i + 2 < bytes.length) {
+      out.push(String.fromCodePoint(((b & 0x0F) << 12) | ((bytes[i + 1] & 0x3F) << 6) | (bytes[i + 2] & 0x3F))); i += 3;
+    } else { i++; }
+  }
+  return out.join('');
 }
 
 function parseFreqBand(tags: string[], name: string): { frequency: number; band: RadioBand } {

@@ -9,6 +9,7 @@ import { useRadioPlayerContext } from '../src/context/RadioPlayerContext';
 import { PlayerStatus } from '../src/types';
 
 function formatFrequency(freq: number, band: string): string {
+  if (!freq || freq === 0) return 'Online';
   const f = band === 'FM' ? freq.toFixed(1) : String(Math.round(freq));
   return `${f} ${band}`;
 }

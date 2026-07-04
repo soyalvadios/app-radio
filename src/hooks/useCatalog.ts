@@ -59,6 +59,14 @@ export function useCatalog(): UseCatalogReturn {
     load();
   }, [load]);
 
+  // Reset selectedState if no stations match (e.g., preferred state has no catalog entries)
+  useEffect(() => {
+    if (stations.length > 0 && selectedState != null) {
+      const states = new Set(stations.map((s) => s.state));
+      if (!states.has(selectedState)) setSelectedState(null);
+    }
+  }, [stations, selectedState]);
+
   // Filtrado en memoria: el catálogo es local y pequeño, así búsqueda y filtro
   // por estado funcionan 100% offline e instantáneos.
   const filteredStations = useMemo(() => {

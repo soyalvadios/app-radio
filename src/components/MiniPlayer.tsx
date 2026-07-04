@@ -5,7 +5,8 @@ import { useRouter } from 'expo-router';
 import { useRadioPlayerContext } from '../context/RadioPlayerContext';
 import { PlayerStatus, type RadioStation } from '../types';
 
-function formatFrequency(station: RadioStation): string {
+function formatStationFrequency(station: RadioStation): string {
+  if (!station.frequency || station.frequency === 0) return 'Online';
   const freq = station.band === 'FM' ? station.frequency.toFixed(1) : String(Math.round(station.frequency));
   return `${freq} ${station.band}`;
 }
@@ -48,7 +49,7 @@ export function MiniPlayer({ bottomOffset = 16 }: MiniPlayerProps) {
             </>
           ) : (
             <Text style={styles.sub} numberOfLines={1}>
-              {formatFrequency(currentStation)} · {statusText}
+              {formatStationFrequency(currentStation)} · {statusText}
             </Text>
           )}
         </View>
@@ -116,7 +117,7 @@ const styles = StyleSheet.create({
     right: 20,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.92)',
+    backgroundColor: '#FFFFFF',
     borderRadius: 24,
     paddingVertical: 10,
     paddingLeft: 20,

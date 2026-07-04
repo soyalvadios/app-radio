@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   listContent: {
     paddingHorizontal: 16,
     paddingTop: 4,
-    paddingBottom: 160, // deja aire para tab bar + MiniPlayer flotante
+    paddingBottom: 180,
     flexGrow: 1,
   },
   center: {
