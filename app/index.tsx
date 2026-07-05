@@ -35,7 +35,7 @@ export default function IndexScreen() {
       <View style={styles.header}>
         <Text style={styles.title}>Bienvenido</Text>
         <Text style={styles.subtitle}>
-          Selecciona tu estado para ver las estaciones de radio locales.
+          Selecciona tu estado para ver las estaciones de radio locales. Catálogo nacional próximamente.
         </Text>
       </View>
 

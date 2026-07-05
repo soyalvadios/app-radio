@@ -1,4 +1,5 @@
 // src/services/CatalogStorageService.ts
+// ponytail: hashId from streamUrl avoids s${i} fragility. Old favorites (s-prefix hashes) lost on upgrade — acceptable for pre-release.
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { MexicanState, RadioBand, RadioStation } from '../types';
 
@@ -67,6 +68,15 @@ function parseFreqBand(tags: string[], name: string): { frequency: number; band:
   return { frequency: 0, band: 'FM' };
 }
 
+function hashId(url: string): string {
+  let hash = 0;
+  for (let i = 0; i < url.length; i++) {
+    hash = ((hash << 5) - hash) + url.charCodeAt(i);
+    hash |= 0;
+  }
+  return 's' + Math.abs(hash).toString(36);
+}
+
 function parseStations(raw: StationsRaw): RadioStation[] {
   const seen = new Set<string>();
   const out: RadioStation[] = [];
@@ -77,7 +87,7 @@ function parseStations(raw: StationsRaw): RadioStation[] {
     const tags = raw.tags[i].split(',');
     const { frequency, band } = parseFreqBand(tags, raw.name[i]);
     out.push({
-      id: `s${i}`,
+      id: hashId(url),
       name: fixEncoding(raw.name[i]).trim(),
       frequency,
       band,

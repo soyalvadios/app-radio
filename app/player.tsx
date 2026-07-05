@@ -18,7 +18,6 @@ export default function PlayerScreen() {
   const insets = useSafeAreaInsets();
   const [imageError, setImageError] = useState(false);
   const [showVolume, setShowVolume] = useState(false);
-  const sliderRef = useRef<View>(null);
   const sliderWidth = useRef(0);
 
   const {
@@ -34,12 +33,10 @@ export default function PlayerScreen() {
   } = useRadioPlayerContext();
 
   const handleVolumeFromTap = useCallback(
-    (pageX: number) => {
-      sliderRef.current?.measure((_x, _y, width, _h, pageXOffset) => {
-        const local = pageX - pageXOffset;
-        const ratio = Math.max(0, Math.min(1, local / width));
-        setVolume(Number(ratio.toFixed(3)));
-      });
+    (locationX: number) => {
+      if (sliderWidth.current <= 0) return;
+      const ratio = Math.max(0, Math.min(1, locationX / sliderWidth.current));
+      setVolume(Number(ratio.toFixed(3)));
     },
     [setVolume],
   );
@@ -53,10 +50,10 @@ export default function PlayerScreen() {
       onPanResponderTerminationRequest: () => false,
       onShouldBlockNativeResponder: () => true,
       onPanResponderGrant: (evt) => {
-        handleVolumeFromTap(evt.nativeEvent.pageX);
+        handleVolumeFromTap(evt.nativeEvent.locationX);
       },
       onPanResponderMove: (evt) => {
-        handleVolumeFromTap(evt.nativeEvent.pageX);
+        handleVolumeFromTap(evt.nativeEvent.locationX);
       },
       onPanResponderRelease: () => {},
     }),
@@ -158,7 +155,6 @@ export default function PlayerScreen() {
             <VolumeX size={18} color="#8E8E93" />
           </Pressable>
           <View
-            ref={sliderRef}
             style={styles.sliderTrack}
             onLayout={(e) => { sliderWidth.current = e.nativeEvent.layout.width; }}
             {...panResponder.panHandlers}

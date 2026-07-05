@@ -14,7 +14,7 @@ Una app hecha con ❤️ y Expo para escuchar estaciones de radio mexicanas en s
 
 - 📡 **50+ estaciones reales** de CDMX (FM/AM)
 - 🔍 **Búsqueda instantánea** por nombre, frecuencia o género
-- 🗺️ **Filtro por estado** (y contando…)
+- 🗺️ **Filtro por estado** — Catálogo CDMX, expansión nacional en roadmap
 - ⭐ **Favoritos** con persistencia local
 - 📴 **Offline-first** — catálogo sin internet
 - 🔄 **Auto-resume** al reconectar
@@ -75,7 +75,7 @@ El catálogo se guarda localmente al primerarranque. Búsqueda y filtros jalan s
 
 - [ ] 📍 Catálogo nacional (32 estados)
 - [x] 🔄 Sintonización por frecuencia (streaming del catálogo)
-- [ ] 📻 FM por hardware (Android, futuro)
+- [ ] 📻 Abrir app FM nativa del fabricante, experimental Android
 - [ ] ⏺️ Grabación de streaming
 - [ ] 📱 Widget Android
 - [ ] 🚗 CarPlay / Android Auto

@@ -1,6 +1,6 @@
 # Radio App — CLAUDE.md
 
-App Expo de radio streaming mexicana. Catalogo offline-first.
+App Expo de radio streaming mexicana. Catálogo offline-first.
 
 ## Stack
 - Expo SDK ~54 + expo-router (file-based)
@@ -9,22 +9,21 @@ App Expo de radio streaming mexicana. Catalogo offline-first.
 - NetInfo para estado de red
 
 ## Arquitectura
-- `app/` — paginas (expo-router): index (onboarding), (tabs)/ (inicio+favs), player (modal)
-- `src/context/RadioPlayerContext.tsx` — unico provider del reproductor, monta useRadioPlayer una vez
-- `src/hooks/useCatalog.ts` — catalogo + filtros + favoritos (PERO cada instancia es independiente)
+- `app/` — páginas (expo-router): index (onboarding), (tabs)/ (inicio+tuner+favs), player (modal)
+- `src/context/RadioPlayerContext.tsx` — único provider del reproductor, monta useRadioPlayer una vez
+- `src/context/CatalogContext.tsx` — CatalogProvider compartido entre tabs (catálogo + favoritos)
 - `src/services/` — NetworkService, CatalogStorageService, RadioHardwareInterface (Null Object)
 
 ## Reglas
-1. **Nunca duplicar useRadioPlayer**. Un solo provider en raiz. Pantallas consumen por contexto.
-2. **useCatalog NO compartido** entre tabs. Si tocas favoritos/hooks/catalogo, prioriza migrar a CatalogProvider antes de agregar mas estados.
-3. **stations_parsed.json** tiene 50 estaciones reales. CatalogStorageService solo usa 8 hardcodeadas. Cualquier cambio en catalogo debe integrar el JSON.
-4. **Sleep timer** en useRadioPlayer: setTimeout/setInterval sin cleanup en unmount. Bug conocido.
-5. **Volume slider** en player.tsx usa `as unknown as number` para porcentaje — no toques, refactor cuando haya tiempo.
-6. **SDK version**: package.json dice ~54, docs referencia v56. Migrar cuando toque.
+1. **Nunca duplicar useRadioPlayer**. Un solo provider en raíz. Pantallas consumen por contexto.
+2. **CatalogProvider es la fuente compartida** de catálogo y favoritos. No hooks useCatalog sueltos.
+3. **No migrar Expo SDK sin plan**. package.json dice ~54, docs referencia v56. Migrar cuando toque.
+4. **FM hardware real no se implementa** por permisos Android y falta de soporte unificado. Sintonización por frecuencia usa streaming del catálogo.
+5. **station IDs derivados de streamUrl** (hash estable). IDs tipo `s${i}` ya no existen — no asumir orden.
 
 ## Convenciones
-- Nombres de archivo en ingles, comentarios en español
-- Servicios como objetos con metodos (no clases)
+- Nombres de archivo en inglés, comentarios en español
+- Servicios como objetos con métodos (no clases)
 - Hooks devuelven objetos planos, no arrays
 - Preferir `useCallback`/`useMemo` en handlers pasados a hijos
 - COLORS / estilos en el mismo archivo del componente (no temas globales)
