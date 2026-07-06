@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
 import { LayoutChangeEvent, PanResponder, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { ChevronLeft, ChevronRight, Play, Pause, Power, Radio, Star } from 'lucide-react-native';
+import { ChevronLeft, ChevronRight, Play, Pause, Power, Star } from 'lucide-react-native';
 import { useCatalogContext } from '../../src/context/CatalogContext';
 import { useRadioPlayerContext } from '../../src/context/RadioPlayerContext';
 import { PlayerStatus } from '../../src/types';
@@ -36,6 +36,7 @@ export default function TunerScreen() {
 
   const [frequency, setFrequency] = useState(initialFreq);
   const [rulerWidth, setRulerWidth] = useState(0);
+  const rulerWidthRef = useRef(0);
 
   const pxPerMhz = rulerWidth > 0 ? rulerWidth / freqRange : 1;
 
@@ -46,10 +47,11 @@ export default function TunerScreen() {
   const fav = station ? isFavorite(station.id) : false;
 
   const updateFreqFromLocationX = useCallback((locationX: number) => {
-    if (rulerWidth <= 0) return;
-    const clamped = Math.max(0, Math.min(rulerWidth, locationX));
-    setFrequency(clampFrequency(FM_MIN + (clamped / rulerWidth) * freqRange));
-  }, [rulerWidth, freqRange]);
+    const w = rulerWidthRef.current;
+    if (w <= 0) return;
+    const clamped = Math.max(0, Math.min(w, locationX));
+    setFrequency(clampFrequency(FM_MIN + (clamped / w) * freqRange));
+  }, [freqRange]);
 
   const panResponder = useRef(
     PanResponder.create({
@@ -65,7 +67,9 @@ export default function TunerScreen() {
   ).current;
 
   const handleRulerLayout = useCallback((e: LayoutChangeEvent) => {
-    setRulerWidth(e.nativeEvent.layout.width);
+    const w = e.nativeEvent.layout.width;
+    rulerWidthRef.current = w;
+    setRulerWidth(w);
   }, []);
 
   const handlePrev = useCallback(() => {
