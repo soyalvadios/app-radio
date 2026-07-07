@@ -51,8 +51,16 @@
                  "  RADIO 620: La Música Que Llegó Para Quedarse",
                  "  RADIO CENTRO: Calidad En Tu Vida / La Estación de la Gran Familia Mexicana",
                  "  W RADIO: La W",
-                 "  REACTOR 105.7: Generaci�n R",
-                 "  OPUS 94: M�sica Cl�sica"
+                 "  REACTOR 105.7: Generaci�n R",
+                 "  OPUS 94: M�sica Cl�sica",
+                 "  UNIVERSAL STEREO: La Estaci�n de los Cl�sicos",
+                 "  RADIO UNAM: Experiencia sonora",
+                 "  HORIZONTE: Claridad informativa y todo el jazz",
+                 "  UAM RADIO: Abierta al tiempo",
+                 "  RADIO EDUCACI�N: Cultura en se�al",
+                 "  RADIO DISNEY: Todos los �xitos",
+                 "  STEREO CIEN: El equilibrio perfecto entre m�sica y noticias",
+                 "  SABROSITA: La m�s caliente"
              ],
     "url":  [
                 "https://playerservices.streamtheworld.com/api/livestream-redirect/XHMFMAAC_SC.aac",
@@ -106,9 +114,17 @@
                 "https://stream.zeno.fm/smm679phup8uv",
                 "https://playerservices.streamtheworld.com/api/livestream-redirect/XEQR_AMAAC.aac",
                 "https://playerservices.streamtheworld.com/api/livestream-redirect/W_RADIOAAC.aac",
-                "https://s2.mexside.net/8002/stream",
-                "https://s2.mexside.net/8016/stream"
-            ],
+"https://s2.mexside.net/8002/stream",
+                 "https://s2.mexside.net/8016/stream",
+                 "https://playerservices.streamtheworld.com/api/livestream-redirect/XERED_AMAAC.aac",
+                 "https://tv.radiohosting.online:9484/stream",
+                 "https://s2.mexside.net/8014/stream",
+                 "https://stream5.mexiserver.com:1124/stream",
+                 "https://s2.mexside.net/8174/stream",
+                 "https://playerservices.streamtheworld.com/api/livestream-redirect/XHFOFMAAC_SC",
+                 "https://playerservices.streamtheworld.com/api/livestream-redirect/XHMMFMAAC.aac",
+                 "https://playerservices.streamtheworld.com/api/livestream-redirect/XEPHAMAAC.aac"
+             ],
     "url_resolved":  [
                          "https://playerservices.streamtheworld.com/api/livestream-redirect/XHMFMAAC_SC.aac",
                          "https://playerservices.streamtheworld.com/api/livestream-redirect/ACIR11_s01AAC.aac",
@@ -161,9 +177,17 @@
                          "https://stream.zeno.fm/smm679phup8uv",
                          "https://playerservices.streamtheworld.com/api/livestream-redirect/XEQR_AMAAC.aac",
                          "https://18503.live.streamtheworld.com:443/W_RADIOAAC.aac",
-                         "https://s2.mexside.net/8002/stream",
-                         "https://s2.mexside.net/8016/stream"
-                     ],
+"https://s2.mexside.net/8002/stream",
+                          "https://s2.mexside.net/8016/stream",
+                          "https://playerservices.streamtheworld.com/api/livestream-redirect/XERED_AMAAC.aac",
+                          "https://tv.radiohosting.online:9484/stream",
+                          "https://s2.mexside.net/8014/stream",
+                          "https://stream5.mexiserver.com:1124/stream",
+                          "https://s2.mexside.net/8174/stream",
+                          "https://playerservices.streamtheworld.com/api/livestream-redirect/XHFOFMAAC_SC",
+                          "https://playerservices.streamtheworld.com/api/livestream-redirect/XHMMFMAAC.aac",
+                          "https://playerservices.streamtheworld.com/api/livestream-redirect/XEPHAMAAC.aac"
+                      ],
     "tags":  [
                  "88.9 fm,acir,américa,cdmx,ciudad de méxico,entretenimiento,espacio deportivo,español,estación,fm,fundación acir,grupo acir,hablada,iheart,iheart radio,información,informativa,latinoamérica,mexico city,moi merino,música en español,música y noticias,news,norteamérica,noticias,noticias cortas,noticias en español,noticias locales,noticias y comentarios,noticias y deportes,noticias y música,panorama informativo,radio,radio hablada,rock,rock en español,rock latino,rock music,tráfico y clima,valle de méxico",
                  "acir,acir online,bailable,cdmx,ciudad de méxico,club dance,clásicos,clásicos en inglés,dance,dance music,dance radio online,edm,electronic,electronic beats,electronic dance music,electronic music,entretenimiento,español,estación,eurodance,grupo acir,iheart,iheart radio,mexico city,mix,mix fm,moi merino,music,music only,música,música del recuerdo,música electrónica,música en inglés,oldies,online,online only,radio,radio online,retro,valle de méxico",
@@ -216,8 +240,16 @@
                  "américa,baladas en inglés,cadena rasa,cdmx,ciudad de méxico,clásicos,clásicos en inglés,entretenimiento,español,estación,fm,goldies,latinoamérica,mexico city,moi merino,music,música,música en inglés,norteamérica,oldies,online,online only,online radio,radio,radio 6.20,radio online,retro music,valle de méxico",
                  "1030 am,am,américa,balada,balada en español,baladas,baladas en español,bolero,boleros,boleros mexicanos,cdmx,ciudad de méxico,clásicos en español,entretenimiento,español,estación,grupo radio centro,latinoamérica,mexico city,moi merino,music,méxico,música,música del recuerdo,música en español,norteamérica,radio,radio centro,retro,retro music,valle de méxico",
                  "96.9 fm,w radio,cdmx,ciudad de méxico,noticias,radio hablada,entretenimiento,español,estación,fm,radiópolis,prisa radio,valle de méxico",
-                 "105.7 fm,reactor,cdmx,ciudad de m�xico,rock,rock alternativo,indie,imer,instituto mexicano de la radio,estaci�n,fm,radio p�blica,p�blica,m�sica alternativa,juvenil,valle de m�xico",
-                 "94.5 fm,opus,cdmx,ciudad de m�xico,m�sica cl�sica,cl�sica,�pera,imer,instituto mexicano de la radio,estaci�n,fm,radio p�blica,p�blica,cultura,valle de m�xico"
+                 "105.7 fm,reactor,cdmx,ciudad de m�xico,rock,rock alternativo,indie,imer,instituto mexicano de la radio,estaci�n,fm,radio p�blica,p�blica,m�sica alternativa,juvenil,valle de m�xico",
+                 "94.5 fm,opus,cdmx,ciudad de m�xico,m�sica cl�sica,cl�sica,�pera,imer,instituto mexicano de la radio,estaci�n,fm,radio p�blica,p�blica,cultura,valle de m�xico",
+                 "88.1 fm,universal,universal stereo,xhred,grupo radio centro,cdmx,ciudad de m�xico,cl�sicos,cl�sicos en ingl�s,classic hits,oldies,adult contemporary,m�sica en ingl�s,estaci�n,fm,m�xico,entretenimiento,espa�ol",
+                 "96.1 fm,radio unam,xeun,unam,universidad,cdmx,ciudad de m�xico,cultural,educativa,m�sica cl�sica,universitaria,radio p�blica,estaci�n,fm,espa�ol,m�xico,cultura",
+                 "107.9 fm,horizonte,xhimr,imer,jazz,cdmx,ciudad de m�xico,m�sica y noticias,estaci�n,fm,radio p�blica,espa�ol,m�xico,cultura",
+                 "94.1 fm,uam radio,xhuam,uam,universidad aut�noma metropolitana,cdmx,ciudad de m�xico,universitaria,cultural,educativa,estaci�n,fm,espa�ol,m�xico",
+                 "96.5 fm,radio educaci�n,xhep,secretar�a de cultura,cdmx,ciudad de m�xico,cultural,educativa,cl�sica,cultura,estaci�n,fm,espa�ol,m�xico",
+                 "92.1 fm,radio disney,xhfo,cdmx,ciudad de m�xico,pop,juvenil,estaci�n,fm,espa�ol,m�xico,entretenimiento,hits",
+                 "100.1 fm,stereo cien,xhmm,nrm comunicaciones,cdmx,ciudad de m�xico,contempor�nea,adult contemporary,hits,pop,noticias,estaci�n,fm,espa�ol,m�xico,entretenimiento",
+                 "590 am,sabrosita,xeph,nrm comunicaciones,cdmx,ciudad de m�xico,tropical,salsa,cumbia,merengue,estaci�n,am,espa�ol,m�xico,entretenimiento"
              ],
     "bitrate":  [
                     48,
@@ -271,9 +303,17 @@
                     0,
                     128,
                     48,
-                    192,
-                    192
-                ],
+192,
+                     192,
+                     48,
+                     80,
+                     192,
+                     128,
+                     128,
+                     48,
+                     48,
+                     32
+                 ],
     "codec":  [
                   "AAC+",
                   "AAC+",
@@ -326,9 +366,17 @@
                   "MP3",
                   "AAC+",
                   "AAC+",
-                  "MP3",
-                  "MP3"
-              ],
+"MP3",
+                     "MP3",
+                     "AAC+",
+                     "MP3",
+                     "MP3",
+                     "MP3",
+                     "MP3",
+                     "AAC+",
+                     "AAC+",
+                     "AAC+"
+                 ],
     "favicon":  [
                     "https://static.mytuner.mobi/media/tvos_radios/466/889-noticias.62cade58.png",
                     "https://i.iheart.com/v3/re/new_assets/5c769b2fe7770a23546c3d7f",
@@ -381,9 +429,17 @@
                     "https://i.postimg.cc/mD0hbHPc/radio620.png",
                     "https://cdn-profiles.tunein.com/s299883/images/logod.png",
                     "https://cdn-profiles.tunein.com/s16553/images/logog.jpg?t=636283",
-                    "https://www.imer.mx/reactor/wp-content/uploads/sites/16/2022/12/cropped-favicon.png",
-                    "https://www.imer.mx/opus/wp-content/uploads/sites/14/2020/07/cropped-favicon-1.png"
-                ],
+"https://www.imer.mx/reactor/wp-content/uploads/sites/16/2022/12/cropped-favicon.png",
+                     "https://www.imer.mx/opus/wp-content/uploads/sites/14/2020/07/cropped-favicon-1.png",
+                     "https://i.postimg.cc/CL1X1m3v/universal-881.png",
+                     "https://www.radio.unam.mx/favicon.ico",
+                     "https://www.imer.mx/horizonte/wp-content/uploads/sites/19/2020/07/cropped-favicon-1.png",
+                     "https://uamradio.uam.mx/favicon.ico",
+                     "https://radioeducacion.edu.mx/favicon.ico",
+                     "https://i.iheart.com/v3/re/new_assets/5d2b869efb11a22b28bb2c50",
+                     "https://stereociendigital.mx/favicon.ico",
+                     "https://sabrositadigital.mx/favicon.ico"
+                 ],
     "homepage":  [
                      "https://www.iheart.com/live/889-noticias-6531/",
                      "https://www.iheart.com/live/90s-dance-by-mix-8052/",
@@ -437,7 +493,15 @@
                      "https://radiocentro1030.mx/",
                      "https://wradio.com.mx/",
                      "https://www.imer.mx/reactor/",
-                     "https://www.imer.mx/opus/"
+                     "https://www.imer.mx/opus/",
+                     "https://universal881.com/",
+                     "https://www.radio.unam.mx/",
+                     "https://www.imer.mx/horizonte/",
+                     "https://uamradio.uam.mx/",
+                     "https://radioeducacion.edu.mx/",
+                     "https://www.iheart.com/live/radio-disney-6507/",
+                     "https://stereociendigital.mx/",
+                     "https://sabrositadigital.mx/"
                  ],
     "state":  [
                   "Ciudad de México",
@@ -488,12 +552,20 @@
                   "Ciudad de México",
                   "Ciudad de México",
                   "Ciudad de México",
-                  "Ciudad de México",
-                  "Ciudad de México",
-                  "Ciudad de México",
-                  "Ciudad de M�xico",
-                  "Ciudad de M�xico"
-              ],
+                   "Ciudad de México",
+                   "Ciudad de México",
+                   "Ciudad de M�xico",
+                   "Ciudad de M�xico",
+                   "Ciudad de México",
+                   "Ciudad de México",
+                   "Ciudad de México",
+                   "Ciudad de México",
+                   "Ciudad de México",
+                   "Ciudad de México",
+                   "Ciudad de México",
+                   "Ciudad de México",
+                   "Ciudad de México"
+                 ],
     "votes":  [
                   35,
                   10,
@@ -545,8 +617,16 @@
                   16,
                   3,
                   2,
-                  0,
-                  0,
-                  0
-              ]
+                   0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ]
 }
