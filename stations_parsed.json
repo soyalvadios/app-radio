@@ -49,7 +49,8 @@
                  "  PA BAILAR: Banda y grupera para la fiesta",
                  "  PIANO LANDSCAPES: MÃºsica instrumental para relajarte",
                  "  RADIO 620: La MÃºsica Que LlegÃ³ Para Quedarse",
-                 "  RADIO CENTRO: Calidad En Tu Vida / La EstaciÃ³n de la Gran Familia Mexicana"
+                 "  RADIO CENTRO: Calidad En Tu Vida / La EstaciÃ³n de la Gran Familia Mexicana",
+                 "  W RADIO: La W"
              ],
     "url":  [
                 "https://playerservices.streamtheworld.com/api/livestream-redirect/XHMFMAAC_SC.aac",
@@ -101,7 +102,8 @@
                 "https://playerservices.streamtheworld.com/api/livestream-redirect/ACIR08_s01AAC.aac",
                 "https://playerservices.streamtheworld.com/api/livestream-redirect/ACIR23_s01AAC.aac",
                 "https://stream.zeno.fm/smm679phup8uv",
-                "https://playerservices.streamtheworld.com/api/livestream-redirect/XEQR_AMAAC.aac"
+                "https://playerservices.streamtheworld.com/api/livestream-redirect/XEQR_AMAAC.aac",
+                "https://playerservices.streamtheworld.com/api/livestream-redirect/W_RADIOAAC.aac"
             ],
     "url_resolved":  [
                          "https://playerservices.streamtheworld.com/api/livestream-redirect/XHMFMAAC_SC.aac",
@@ -153,7 +155,8 @@
                          "https://playerservices.streamtheworld.com/api/livestream-redirect/ACIR08_s01AAC.aac",
                          "https://playerservices.streamtheworld.com/api/livestream-redirect/ACIR23_s01AAC.aac",
                          "https://stream.zeno.fm/smm679phup8uv",
-                         "https://playerservices.streamtheworld.com/api/livestream-redirect/XEQR_AMAAC.aac"
+                         "https://playerservices.streamtheworld.com/api/livestream-redirect/XEQR_AMAAC.aac",
+                         "https://18503.live.streamtheworld.com:443/W_RADIOAAC.aac"
                      ],
     "tags":  [
                  "88.9 fm,acir,amÃ©rica,cdmx,ciudad de mÃ©xico,entretenimiento,espacio deportivo,espaÃ±ol,estaciÃ³n,fm,fundaciÃ³n acir,grupo acir,hablada,iheart,iheart radio,informaciÃ³n,informativa,latinoamÃ©rica,mexico city,moi merino,mÃºsica en espaÃ±ol,mÃºsica y noticias,news,norteamÃ©rica,noticias,noticias cortas,noticias en espaÃ±ol,noticias locales,noticias y comentarios,noticias y deportes,noticias y mÃºsica,panorama informativo,radio,radio hablada,rock,rock en espaÃ±ol,rock latino,rock music,trÃ¡fico y clima,valle de mÃ©xico",
@@ -205,7 +208,8 @@
                  "acir,amÃ©rica,bailable,banda,cdmx,ciudad de mÃ©xico,clÃ¡sicos,clÃ¡sicos en espaÃ±ol,cumbia,cumbias,entretenimiento,espaÃ±ol,estaciÃ³n,grupera,grupero,grupo acir,iheart,iheart radio,la comadre,latinoamÃ©rica,mexican music,mexico city,moi merino,music,mÃ©xico,mÃºsica,mÃºsica del recuerdo,mÃºsica en espaÃ±ol,mÃºsica mexicana,mÃºsica popular mexicana,mÃºsica regional,mÃºsica regional mexicana,mÃºsica retro,mÃºsica tropical,norteamÃ©rica,puros Ã©xitos!!!,radio,regional,regional mexican,regional mexicana,regional music,tropical,tropical music,valle de mÃ©xico",
                  "acir,acir online,amÃ©rica,cdmx,ciudad de mÃ©xico,entretenimiento,espaÃ±ol,estaciÃ³n,grupo acir,iheart,iheart radio,instrumental,instrumental music,latinoamÃ©rica,mexico city,moi merino,music,mÃ©xico,mÃºsica,mÃºsica instrumental,norteamÃ©rica,online,online only,piano,piano landscapes,radio,radio online,relax,valle de mÃ©xico",
                  "amÃ©rica,baladas en inglÃ©s,cadena rasa,cdmx,ciudad de mÃ©xico,clÃ¡sicos,clÃ¡sicos en inglÃ©s,entretenimiento,espaÃ±ol,estaciÃ³n,fm,goldies,latinoamÃ©rica,mexico city,moi merino,music,mÃºsica,mÃºsica en inglÃ©s,norteamÃ©rica,oldies,online,online only,online radio,radio,radio 6.20,radio online,retro music,valle de mÃ©xico",
-                 "1030 am,am,amÃ©rica,balada,balada en espaÃ±ol,baladas,baladas en espaÃ±ol,bolero,boleros,boleros mexicanos,cdmx,ciudad de mÃ©xico,clÃ¡sicos en espaÃ±ol,entretenimiento,espaÃ±ol,estaciÃ³n,grupo radio centro,latinoamÃ©rica,mexico city,moi merino,music,mÃ©xico,mÃºsica,mÃºsica del recuerdo,mÃºsica en espaÃ±ol,norteamÃ©rica,radio,radio centro,retro,retro music,valle de mÃ©xico"
+                 "1030 am,am,amÃ©rica,balada,balada en espaÃ±ol,baladas,baladas en espaÃ±ol,bolero,boleros,boleros mexicanos,cdmx,ciudad de mÃ©xico,clÃ¡sicos en espaÃ±ol,entretenimiento,espaÃ±ol,estaciÃ³n,grupo radio centro,latinoamÃ©rica,mexico city,moi merino,music,mÃ©xico,mÃºsica,mÃºsica del recuerdo,mÃºsica en espaÃ±ol,norteamÃ©rica,radio,radio centro,retro,retro music,valle de mÃ©xico",
+                 "96.9 fm,w radio,cdmx,ciudad de mÃ©xico,noticias,radio hablada,entretenimiento,espaÃ±ol,estaciÃ³n,fm,radiÃ³polis,prisa radio,valle de mÃ©xico"
              ],
     "bitrate":  [
                     48,
@@ -257,7 +261,8 @@
                     48,
                     48,
                     0,
-                    128
+                    128,
+                    48
                 ],
     "codec":  [
                   "AAC+",
@@ -309,6 +314,7 @@
                   "AAC+",
                   "AAC+",
                   "MP3",
+                  "AAC+",
                   "AAC+"
               ],
     "favicon":  [
@@ -361,7 +367,8 @@
                     "https://i.iheart.com/v3/re/assets.streams/68cf4e9742d32d36188fbbc4",
                     "https://i.iheart.com/v3/re/new_assets/5bd35fe16217a1eceece2270",
                     "https://i.postimg.cc/mD0hbHPc/radio620.png",
-                    "https://cdn-profiles.tunein.com/s299883/images/logod.png"
+                    "https://cdn-profiles.tunein.com/s299883/images/logod.png",
+                    "https://cdn-profiles.tunein.com/s16553/images/logog.jpg?t=636283"
                 ],
     "homepage":  [
                      "https://www.iheart.com/live/889-noticias-6531/",
@@ -413,9 +420,11 @@
                      "https://www.iheart.com/live/pa-bailar-8049/",
                      "https://www.iheart.com/live/piano-landscapes-8064/",
                      "https://cadenarasa.com/cdmx/cdmx/radio-620",
-                     "https://radiocentro1030.mx/"
+                     "https://radiocentro1030.mx/",
+                     "https://wradio.com.mx/"
                  ],
     "state":  [
+                  "Ciudad de MÃ©xico",
                   "Ciudad de MÃ©xico",
                   "Ciudad de MÃ©xico",
                   "Ciudad de MÃ©xico",
@@ -517,6 +526,7 @@
                   1,
                   16,
                   3,
-                  2
+                  2,
+                  0
               ]
 }
