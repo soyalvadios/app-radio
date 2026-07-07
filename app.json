@@ -4,6 +4,7 @@
     "slug": "nopales-radio",
     "version": "1.0.0",
     "sdkVersion": "54.0.0",
+    "scheme": "nopalesradio",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
