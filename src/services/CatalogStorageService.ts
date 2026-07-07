@@ -7,7 +7,7 @@ const CATALOG_KEY = '@radio_catalog_v5';
 const CATALOG_VERSION_KEY = '@radio_catalog_version';
 const FAVORITES_KEY = '@radio/favorites/v2';
 const PREFERRED_STATE_KEY = '@radio/preferred_state';
-const CATALOG_VERSION = 4;
+const CATALOG_VERSION = 5;
 
 interface StationsRaw {
   name: string[];
