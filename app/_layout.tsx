@@ -1,6 +1,6 @@
 // app/_layout.tsx
 import { View } from 'react-native';
-import { Stack } from 'expo-router';
+import { Stack, usePathname } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import {
   SafeAreaProvider,
@@ -17,6 +17,7 @@ import { TAB_BAR_HEIGHT } from '../src/theme/layout';
  */
 function RootContent() {
   const insets = useSafeAreaInsets();
+  const pathname = usePathname();
 
   return (
     <View style={{ flex: 1 }}>
@@ -26,12 +27,9 @@ function RootContent() {
         <Stack.Screen name="player" options={{ presentation: 'modal' }} />
       </Stack>
 
-      {/*
-        MiniPlayer PERSISTENTE: vive aquí, fuera de las pantallas, así sigue
-        visible al cambiar de pestaña. Lo posicionamos justo encima de la tab
-        bar = alto de la barra + safe-area inferior + un pequeño respiro.
-      */}
-      <MiniPlayer bottomOffset={insets.bottom + TAB_BAR_HEIGHT + 8} />
+      {pathname !== '/player' && (
+        <MiniPlayer bottomOffset={insets.bottom + TAB_BAR_HEIGHT + 8} />
+      )}
     </View>
   );
 }
