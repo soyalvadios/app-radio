@@ -1,4 +1,30 @@
-{
+﻿{
   "$schema": "https://opencode.ai/config.json",
-  "share": "manual"
+  "share": "manual",
+  "shell": "pwsh",
+  "permission": {
+    "skill": {
+      "*": "allow"
+    },
+    "bash": {
+      "*": "ask",
+      "git status*": "allow",
+      "git diff*": "allow",
+      "git log*": "allow",
+      "npm run typecheck*": "allow",
+      "npm test*": "allow",
+      "npm start*": "ask",
+      "npx expo start*": "ask",
+      "npx eas-cli build*": "ask",
+      "eas build*": "ask",
+      "git add*": "ask",
+      "git commit*": "ask",
+      "git push*": "ask",
+      "git tag*": "ask",
+      "npm install*": "ask",
+      "npm audit fix --force*": "deny",
+      "rm -rf*": "deny",
+      "del *": "ask"
+    }
+  }
 }
