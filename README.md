@@ -10,18 +10,53 @@
 
 Una app hecha con ❤️ y Expo para escuchar estaciones de radio mexicanas en streaming. Porque el radio no debería necesitar más que un tap.
 
-## 🚀 Features
+## 🚀 Features (implementado)
 
-- 📡 **50+ estaciones reales** de CDMX (FM/AM)
-- 🔍 **Búsqueda instantánea** por nombre, frecuencia o género
-- 🗺️ **Filtro por estado** — Catálogo CDMX, expansión nacional en roadmap
-- ⭐ **Favoritos** con persistencia local
-- 📴 **Offline-first** — catálogo sin internet
-- 🔄 **Auto-resume** al reconectar
-- ⏰ **Sleep timer** (15/30/45/60 min)
-- 🔊 **Control de volumen** con slider táctil
-- 🎵 **MiniPlayer persistente** + pantalla full
-- 🔇 **Modo Offline** automático
+- 📱 Expo SDK ~54 + React Native + TypeScript
+- 📡 **50+ estaciones reales** de CDMX (FM/AM), streaming online con expo-audio
+- 📴 **Catálogo offline-first** — catálogo local, favoritos y búsqueda funcionan sin internet
+- 🔍 **Búsqueda** por nombre, frecuencia, estado y tags
+- 🗺️ **Filtros/categorías por género**
+- ⭐ **Favoritos** locales
+- 🎵 **MiniPlayer** persistente + **pantalla completa** del player
+- ⏰ **Sleep timer**
+- ▶️ **Background playback** (sigue sonando con la app en segundo plano)
+- 📻 **Sintonización por frecuencia** usando streams del catálogo (no chip FM real)
+- 🇲🇽 Catálogo inicial enfocado en **México/CDMX**
+- 🚫 Sin anuncios · sin cuenta
+- 🔓 Open-source (MIT)
+- 📦 **APK Android disponible** (distribución manual, no Play Store)
+
+## ℹ️ Aclaraciones importantes
+
+- **No usa el chip FM real del celular.** Todo lo que suena es streaming por internet.
+- Para escuchar estaciones **sí necesitas internet o WiFi**. Sin conexión no hay audio.
+- Catálogo, favoritos y búsqueda **sí funcionan localmente** sin internet (no así el audio).
+- **iOS** funciona en pruebas/desarrollo, pero **no está publicada en App Store**.
+- **Android** se distribuye como **APK manual**, no está en Play Store.
+
+## 🧪 FM del teléfono (experimental)
+
+- Experimental, no confundir con streaming (que es el modo principal y estable).
+- **iOS**: no disponible.
+- **Android**: fase actual solo documenta/prepara el fallback (ver `docs/FM_HARDWARE_RESEARCH.md`).
+- Futuro posible: abrir la app FM nativa del fabricante (Samsung, Xiaomi, etc.) si existe en el equipo.
+- Nopales **no controla frecuencia FM real** desde su propia UI.
+
+## 📊 Estado de funciones
+
+| Función | Estado | Nota |
+|---|---|---|
+| Catálogo México (CDMX) | ✅ Implementado | 50+ estaciones reales |
+| Catálogo nacional (32 estados) | ⏳ Pendiente | Roadmap |
+| Sintonización por frecuencia | ✅ Implementado | Usa streams del catálogo, no chip FM |
+| FM hardware real | ❌ No implementado | No viable en Android/iOS estándar (ver docs) |
+| Abrir app FM nativa | 🧪 Experimental | Solo documentado/preparado en Android |
+| Grabación de streaming | 🔍 En investigación | Bloqueado por temas legales y permisos |
+| Widget Android | 🔮 Futuro | No implementado |
+| Android Auto / CarPlay | 🔮 Futuro | No implementado |
+| iOS | ✅ Funciona (dev) | No publicada en App Store |
+| APK Android | ✅ Disponible | Distribución manual, no Play Store |
 
 ## 🛠️ Stack
 
@@ -65,20 +100,21 @@ src/
   theme/              # constantes de layout
   types.ts            # tipos compartidos
 stations_parsed.json  # 50 estaciones reales
+docs/                 # investigación técnica (FM hardware, etc.)
 ```
 
 ## 📴 Modo Offline
 
-El catálogo se guarda localmente al primerarranque. Búsqueda y filtros jalan sin internet. El streaming se pausa solo si no hay conexión y reanuda solito cuando vuelves.
+El catálogo se guarda localmente al primer arranque. Búsqueda y filtros jalan sin internet. El audio de streaming se pausa solo si no hay conexión y reanuda solito cuando vuelves. El streaming en sí **siempre requiere internet**.
 
 ## 🗺️ Roadmap
 
 - [ ] 📍 Catálogo nacional (32 estados)
-- [x] 🔄 Sintonización por frecuencia (streaming del catálogo)
-- [ ] 📻 Abrir app FM nativa del fabricante, experimental Android
-- [ ] ⏺️ Grabación de streaming
+- [ ] 🌎 Expansión LATAM (futuro)
+- [ ] 📻 Abrir app FM nativa del fabricante — futuro experimental (Android)
 - [ ] 📱 Widget Android
-- [ ] 🚗 CarPlay / Android Auto
+- [ ] 🚗 Android Auto / CarPlay
+- [ ] ⏺️ Grabación de streaming — en investigación, no implementado (temas legales y permisos)
 
 ## ☕ Apoya el proyecto
 
@@ -101,6 +137,12 @@ npm run typecheck
 npx eas build:configure
 npx eas build -p android --profile preview
 ```
+
+El APK se comparte manualmente (no está en Google Play).
+
+## 📢 Para compartir (Facebook)
+
+> 🎧 Nopales Radio — app para escuchar estaciones de radio mexicanas (CDMX) en streaming, gratis. Sin anuncios, sin cuenta, open-source. Necesitas internet para escuchar. APK de Android disponible para descarga manual. iOS en pruebas, aún sin publicar en App Store.
 
 ## ⚖️ Disclaimer
 
