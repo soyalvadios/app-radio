@@ -12,17 +12,36 @@ function normalize(text: string): string {
     .trim();
 }
 
+export const GENRES = [
+  'Noticias',
+  'Pop',
+  'Rock',
+  'Romántica',
+  'Regional mexicano',
+  'Clásica',
+  'Jazz',
+  'Electrónica',
+  'Salsa',
+  'Cultural',
+  'Universitaria',
+] as const;
+
+export type Genre = (typeof GENRES)[number];
+
 export interface UseCatalogReturn {
   loading: boolean;
   error: string | null;
   stations: RadioStation[]; // catálogo completo
-  filteredStations: RadioStation[]; // tras filtro de estado + búsqueda
+  filteredStations: RadioStation[]; // tras filtro de estado + género + búsqueda
   favoriteStations: RadioStation[];
   favoriteIds: Set<string>;
   searchQuery: string;
   selectedState: MexicanState | null;
+  selectedGenre: Genre | null;
+  availableGenres: Genre[];
   setSearchQuery: (query: string) => void;
   setSelectedState: (state: MexicanState | null) => void;
+  setSelectedGenre: (genre: Genre | null) => void;
   toggleFavorite: (stationId: string) => Promise<void>;
   isFavorite: (stationId: string) => boolean;
   refresh: () => Promise<void>;
@@ -35,6 +54,7 @@ export function useCatalog(): UseCatalogReturn {
   const [favoriteIds, setFavoriteIds] = useState<Set<string>>(new Set());
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedState, setSelectedState] = useState<MexicanState | null>(null);
+  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
 
   const load = useCallback(async () => {
     try {
@@ -67,19 +87,30 @@ export function useCatalog(): UseCatalogReturn {
     }
   }, [stations, selectedState]);
 
-  // Filtrado en memoria: el catálogo es local y pequeño, así búsqueda y filtro
-  // por estado funcionan 100% offline e instantáneos.
+  // Géneros disponibles derivados del catálogo (solo los que tienen al menos una estación)
+  const availableGenres = useMemo(() => {
+    return GENRES.filter((genre) => {
+      const ng = normalize(genre);
+      return stations.some((s) => s.tags.some((t) => normalize(t).includes(ng)));
+    });
+  }, [stations]);
+
+  // Filtrado en memoria: estado + género + búsqueda textual combinados.
   const filteredStations = useMemo(() => {
     const q = normalize(searchQuery);
     return stations.filter((station) => {
       if (selectedState != null && station.state !== selectedState) return false;
+      if (selectedGenre != null) {
+        const ng = normalize(selectedGenre);
+        if (!station.tags.some((t) => normalize(t).includes(ng))) return false;
+      }
       if (q.length === 0) return true;
       const haystack = normalize(
-        `${station.name} ${station.frequency} ${station.city ?? ''} ${station.genre ?? ''} ${station.state}`,
+        `${station.name} ${station.frequency} ${station.city ?? ''} ${station.genre ?? ''} ${station.state} ${station.tags.join(' ')}`,
       );
       return haystack.includes(q);
     });
-  }, [stations, selectedState, searchQuery]);
+  }, [stations, selectedState, selectedGenre, searchQuery]);
 
   const favoriteStations = useMemo(
     () => stations.filter((station) => favoriteIds.has(station.id)),
@@ -122,8 +153,11 @@ export function useCatalog(): UseCatalogReturn {
     favoriteIds,
     searchQuery,
     selectedState,
+    selectedGenre,
+    availableGenres,
     setSearchQuery,
     setSelectedState,
+    setSelectedGenre,
     toggleFavorite,
     isFavorite,
     refresh: load,

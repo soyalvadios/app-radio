@@ -5,6 +5,7 @@ import {
   Alert,
   FlatList,
   Pressable,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -36,6 +37,9 @@ export function HomeScreen() {
     setSearchQuery,
     selectedState,
     setSelectedState,
+    selectedGenre,
+    setSelectedGenre,
+    availableGenres,
     isFavorite,
     toggleFavorite,
   } = useCatalogContext();
@@ -114,6 +118,34 @@ export function HomeScreen() {
           </Text>
           <ChevronDown size={16} color={COLORS.textMuted} />
         </Pressable>
+
+        {availableGenres.length > 0 && (
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.genreRow}
+          >
+            <Pressable
+              onPress={() => setSelectedGenre(null)}
+              style={[styles.genreChip, selectedGenre == null && styles.genreChipActive]}
+            >
+              <Text style={[styles.genreChipText, selectedGenre == null && styles.genreChipTextActive]}>
+                Todos
+              </Text>
+            </Pressable>
+            {availableGenres.map((genre) => (
+              <Pressable
+                key={genre}
+                onPress={() => setSelectedGenre(genre)}
+                style={[styles.genreChip, selectedGenre === genre && styles.genreChipActive]}
+              >
+                <Text style={[styles.genreChipText, selectedGenre === genre && styles.genreChipTextActive]}>
+                  {genre}
+                </Text>
+              </Pressable>
+            ))}
+          </ScrollView>
+        )}
       </View>
 
       {loading ? (
@@ -220,5 +252,28 @@ const styles = StyleSheet.create({
   emptyText: {
     fontSize: 14,
     color: COLORS.textMuted,
+  },
+  genreRow: {
+    flexDirection: 'row',
+    paddingHorizontal: 16,
+    paddingTop: 8,
+    gap: 8,
+  },
+  genreChip: {
+    paddingVertical: 6,
+    paddingHorizontal: 14,
+    borderRadius: 16,
+    backgroundColor: '#F2F2F7',
+  },
+  genreChipActive: {
+    backgroundColor: COLORS.accent,
+  },
+  genreChipText: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: COLORS.text,
+  },
+  genreChipTextActive: {
+    color: '#FFFFFF',
   },
 });

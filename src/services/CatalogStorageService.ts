@@ -7,7 +7,7 @@ const CATALOG_KEY = '@radio_catalog_v5';
 const CATALOG_VERSION_KEY = '@radio_catalog_version';
 const FAVORITES_KEY = '@radio/favorites/v2';
 const PREFERRED_STATE_KEY = '@radio/preferred_state';
-const CATALOG_VERSION = 5;
+const CATALOG_VERSION = 6;
 
 interface StationsRaw {
   name: string[];
@@ -23,6 +23,9 @@ interface StationsRaw {
 }
 
 function fixEncoding(text: string): string {
+  // ponytail: solo reparar si hay indicios reales de mojibake. Sin guardia,
+  // esto reinterpreta como UTF-8 texto ya correcto (p.ej. "Educación" -> "Educacin").
+  if (!/[ÃÂ�]/.test(text)) return text;
   const bytes: number[] = [];
   for (let i = 0; i < text.length; i++) {
     const cp = text.charCodeAt(i);
@@ -84,8 +87,8 @@ function parseStations(raw: StationsRaw): RadioStation[] {
     const url = raw.url_resolved[i] || raw.url[i];
     if (seen.has(url)) continue;
     seen.add(url);
-    const tags = raw.tags[i].split(',');
-    const { frequency, band } = parseFreqBand(tags, raw.name[i]);
+    const tagItems = raw.tags[i].split(',');
+    const { frequency, band } = parseFreqBand(tagItems, raw.name[i]);
     out.push({
       id: hashId(url),
       name: fixEncoding(raw.name[i]).trim(),
@@ -96,6 +99,7 @@ function parseStations(raw: StationsRaw): RadioStation[] {
       city: 'Ciudad de México',
       logo: raw.favicon[i] || '',
       genre: raw.codec[i] ? `${raw.codec[i]} · ${raw.bitrate[i]}kbps` : undefined,
+      tags: tagItems.map((t) => fixEncoding(t.trim())).filter(Boolean),
     });
   }
   return out;

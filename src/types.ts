@@ -35,6 +35,7 @@ export interface RadioStation {
   city?: string;
   logo: string;             // URL del logo (cacheable)
   genre?: string;
+  tags: string[];           // etiquetas limpias del catálogo (categorías + género + frecuencia)
 }
 
 /**
