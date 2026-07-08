@@ -1,10 +1,11 @@
 import { useCallback, useRef, useState } from 'react';
-import { LayoutChangeEvent, PanResponder, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Alert, LayoutChangeEvent, PanResponder, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { ChevronLeft, ChevronRight, Play, Pause, Power, Star } from 'lucide-react-native';
+import { ChevronLeft, ChevronRight, Play, Pause, Power, Star, Radio } from 'lucide-react-native';
 import { useCatalogContext } from '../../src/context/CatalogContext';
 import { useRadioPlayerContext } from '../../src/context/RadioPlayerContext';
 import { PlayerStatus } from '../../src/types';
+import { nativeFmAppService } from '../../src/services/NativeFmAppService';
 import {
   FM_MIN,
   FM_MAX,
@@ -96,6 +97,24 @@ export default function TunerScreen() {
     if (station) toggleFavorite(station.id);
   }, [station, toggleFavorite]);
 
+  const handleNativeFm = useCallback(async () => {
+    const status = await nativeFmAppService.getHardwareStatus();
+    if (status === 'AVAILABLE_VIA_INTENT') {
+      const apps = await nativeFmAppService.scanNativeFmApps();
+      const installed = apps.find((a) => a.isInstalled);
+      if (installed) {
+        await nativeFmAppService.openNativeFmApp(installed.packageName);
+        return;
+      }
+    }
+    const reason = nativeFmAppService.getUnsupportedReason()
+      ?? 'FM del teléfono no está disponible en este dispositivo.';
+    Alert.alert(
+      'FM del teléfono (experimental)',
+      `${reason}\n\nExperimental. Requiere que tu teléfono tenga app FM del fabricante y, a veces, audífonos como antena.`,
+    );
+  }, []);
+
   const indicatorX = rulerWidth > 0 ? ((frequency - FM_MIN) / freqRange) * rulerWidth : 0;
 
   return (
@@ -181,6 +200,11 @@ export default function TunerScreen() {
           <View style={[styles.indicator, { left: indicatorX - 6 }]} />
         </View>
       </View>
+
+      <Pressable onPress={handleNativeFm} style={styles.nativeFmLink} hitSlop={8}>
+        <Radio size={14} color="#8E8E93" />
+        <Text style={styles.nativeFmLinkText}>FM del teléfono (experimental)</Text>
+      </Pressable>
     </View>
   );
 }
@@ -299,6 +323,19 @@ const styles = StyleSheet.create({
     borderLeftWidth: 1,
     borderLeftColor: '#D1D5DB',
     height: 14,
+  },
+  nativeFmLink: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    marginTop: 16,
+    paddingVertical: 8,
+  },
+  nativeFmLinkText: {
+    fontSize: 12,
+    color: '#8E8E93',
+    fontWeight: '500',
   },
   indicator: {
     position: 'absolute',
